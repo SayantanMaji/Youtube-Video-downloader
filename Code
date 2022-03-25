@@ -1,0 +1,30 @@
+from tkinter import *
+from pytube import *
+
+root = Tk()
+root.geometry('1000x700')
+root.resizable()
+root.config(background='black')
+root.bbox()
+root.title("Sayantan's Youtube video downloader")
+
+Label(root, text='\nDownload Your favourite \nYoutube Videos ', fg='white', bg='black', font='Centaur 70 ').pack()
+
+link = StringVar()
+
+Label(root, text='\nPaste Link Here:', fg='white', bg='black', font='Centaur 50 ').pack()
+Entry(root, width=100, textvariable=link).pack()
+
+Label(root, text='\n', fg='white', bg='black', font='Centaur 15').pack()
+
+
+def downloader():
+    url = YouTube(str(link.get()))
+    video = url.streams.filter(res="720p").first()
+    video.download()
+    Label(root, text='DOWNLOADED', fg='white', bg='black', font='Centaur 25').pack()
+
+
+Button(root, text='DOWNLOAD', fg='white', font='Centaur 35 ', bg='deep pink', padx=2, command=downloader).pack()
+
+root.mainloop()
